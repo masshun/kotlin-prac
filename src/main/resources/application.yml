@@ -1,1 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost/prac
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+    defaultAutoCommit: false
+    initialization-mode: always
 
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    #    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
