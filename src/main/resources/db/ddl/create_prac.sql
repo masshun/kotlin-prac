@@ -33,7 +33,7 @@ drop table if exists m_producer cascade;
 --* RestoreFromTempTable
 create table m_producer (
   producer_id bigint not null
-  , name character varying(255) not null check(name<>")
+  , name character varying(255) not null check(name<>'')
   , created_at timestamp default now() not null
   , updated_at timestamp default now() not null
 ) ;
