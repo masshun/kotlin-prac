@@ -14,4 +14,3 @@ RETURNS VOID AS $$
         END LOOP;
     END;
 $$ LANGUAGE plpgsql;
-
