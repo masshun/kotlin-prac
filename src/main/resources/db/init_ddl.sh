@@ -9,3 +9,5 @@ psql -U postgres prac < ddl/create_sequence.sql 2>&1 | grep -E "(NOTICE|ERROR|FA
 psql -U postgres prac < function/add_product.sql 2>&1 | grep -E "(NOTICE|ERROR|FATAL)"
 psql -U postgres prac < function/add_producer.sql 2>&1 | grep -E "(NOTICE|ERROR|FATAL)"
 psql -U postgres prac < ddl/init_master.sql 2>&1 | grep -E "(NOTICE|ERROR|FATAL)"
+psql -U postgres prac < function/create_org_log.sql 2>&1 | grep -E "(NOTICE|ERROR|FATAL)"
+psql -U postgres prac < function/trigger_org_log.sql 2>&1 | grep -E "(NOTICE|ERROR|FATAL)"
