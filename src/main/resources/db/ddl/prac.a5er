@@ -46,17 +46,18 @@ TableOption=
 Page=MAIN
 Left=50
 Top=50
-Field="更新日時","updated_at","timestamp(6) with time zone","NOT NULL",,"now()","",$FFFFFFFF,""
-Field="登録日時","created_at","timestamp(6) with time zone","NOT NULL",,"now()","",$FFFFFFFF,""
-Field="現所属組織名","new_org_name","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="ログID","log_id","bigint","NOT NULL",0,"","",$FFFFFFFF,""
+Field="旧所属組織ID","old_org_id","bigint",,,"","",$FFFFFFFF,""
+Field="旧所属組織名","old_org_name","character varying(255)",,,"","",$FFFFFFFF,""
 Field="現所属組織ID","new_org_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
-Field="旧所属組織名","old_org_name","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="旧所属組織ID","old_org_id","bigint","NOT NULL",,"","",$FFFFFFFF,""
-Field="ログID","l_log_id","bigint","NOT NULL",0,"","",$FFFFFFFF,""
-Index=l_org_log_pki=1,l_log_id
+Field="現所属組織名","new_org_name","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="登録日時","created_at","timestamp(6) with time zone",,,"now()","",$FFFFFFFF,""
+Field="更新日時","updated_at","timestamp(6) with time zone",,,"now()","",$FFFFFFFF,""
+Index=l_org_log_pki=1,log_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
+ModifiedDateTime=20210314200219
 Position="MAIN",50,50
 ZOrder=-1
 
@@ -71,13 +72,13 @@ Top=50
 Field="ID","producer_id","bigint","NOT NULL",0,"","",$FFFFFFFF,""
 Field="組織ID","org_id","bigint",,,"","",$FFFFFFFF,""
 Field="生産者名","name","character varying(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="作成日","created_at","timestamp(6) without time zone","NOT NULL",,"now()","",$FFFFFFFF,""
-Field="更新日","updated_at","timestamp(6) without time zone","NOT NULL",,"now()","",$FFFFFFFF,""
+Field="作成日","created_at","timestamp(6) without time zone",,,"now()","",$FFFFFFFF,""
+Field="更新日","updated_at","timestamp(6) without time zone",,,"now()","",$FFFFFFFF,""
 Index=m_producer_ix1=1,producer_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20210311080340
+ModifiedDateTime=20210314193519
 Position="MAIN",350,50
 ZOrder=-2
 
@@ -87,18 +88,19 @@ LName=商品
 Comment=
 TableOption=
 Page=MAIN
-Left=650
+Left=900
 Top=50
 Field="ID","product_id","bigint","NOT NULL",0,"","プライマリーキー",$FFFFFFFF,""
 Field="商品名","name","character varying(30)","NOT NULL",,"","",$FFFFFFFF,""
 Field="価格","price","integer",,,"","",$FFFFFFFF,""
-Field="作成日","created_at","timestamp(6) with time zone","NOT NULL",,"now()","",$FFFFFFFF,""
-Field="更新日","updated_at","timestamp(6) with time zone","NOT NULL",,"now()","",$FFFFFFFF,""
+Field="作成日","created_at","timestamp(6) with time zone",,,"now()","",$FFFFFFFF,""
+Field="更新日","updated_at","timestamp(6) with time zone",,,"now()","",$FFFFFFFF,""
 Index=m_product_ix1=1,product_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-Position="MAIN",650,50
+ModifiedDateTime=20210314193510
+Position="MAIN",900,50
 ZOrder=-3
 
 [Entity]
@@ -107,7 +109,7 @@ LName=商品_生産者関連
 Comment=
 TableOption=
 Page=MAIN
-Left=950
+Left=600
 Top=50
 Field="商品ID","product_id","integer","NOT NULL",0,"","",$FFFFFFFF,""
 Field="生産者ID","producer_id","integer","NOT NULL",1,"","",$FFFFFFFF,""
@@ -115,7 +117,7 @@ Index=r_product_producer_ix1=1,product_id,producer_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-Position="MAIN",950,50
+Position="MAIN",600,50
 ZOrder=-4
 
 [Relation]
@@ -127,14 +129,14 @@ Fields1=product_id
 Fields2=product_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,500,9500,500,R,R,""
+Position="MAIN",0,500,9500,266,R,R,""
 Dependence=1
 Caption=
 PName=
 LineMode=0
 Bar1=50
 Bar2=950
-Bar3=50
+Bar3=27
 TermPos1=R
 TermPos2=R
 ZOrder=-6
@@ -165,18 +167,18 @@ PName=m_organization
 LName=組織テーブル
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=300
 Top=300
-Field="更新日時","updated_at","timestamp with time zone","NOT NULL",,"now()","",$FFFFFFFF,""
-Field="登録日時","created_at","timestamp with time zone","NOT NULL",,"now()","",$FFFFFFFF,""
-Field="組織名","org_name","@VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="組織ID","org_id","bigint","NOT NULL",0,"","",$FFFFFFFF,""
+Field="組織名","org_name","@VARCHAR(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="登録日時","created_at","timestamp with time zone",,,"now()","",$FFFFFFFF,""
+Field="更新日時","updated_at","timestamp with time zone",,,"now()","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20210311080057
-Position="Main",300,300,294,169
+ModifiedDateTime=20210314193502
+Position="MAIN",300,300,294,169
 ZOrder=0
 
 [Relation]

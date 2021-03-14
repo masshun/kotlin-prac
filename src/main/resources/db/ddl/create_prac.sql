@@ -1,5 +1,5 @@
 -- Project Name : noname
--- Date/Time    : 2021/03/11 8:09:01
+-- Date/Time    : 2021/03/14 20:02:43
 -- Author       : matsushitashun
 -- RDBMS Type   : PostgreSQL
 -- Application  : A5:SQL Mk-2
@@ -13,28 +13,28 @@
 -- 組織テーブル
 --* RestoreFromTempTable
 create table m_organization (
-  updated_at timestamp with time zone default now() not null
-  , created_at timestamp with time zone default now() not null
+  org_id bigint not null
   , org_name character varying(255) not null
-  , org_id bigint not null
+  , created_at timestamp with time zone default now()
+  , updated_at timestamp with time zone default now()
   , constraint m_organization_PKC primary key (org_id)
 ) ;
 
 -- 所属組織ログ
 --* RestoreFromTempTable
 create table l_org_log (
-  updated_at timestamp(6) with time zone default now() not null
-  , created_at timestamp(6) with time zone default now() not null
-  , new_org_name character varying(255) not null
+  log_id bigint not null
+  , old_org_id bigint
+  , old_org_name character varying(255)
   , new_org_id bigint not null
-  , old_org_name character varying(255) not null
-  , old_org_id bigint not null
-  , l_log_id bigint not null
-  , constraint l_org_log_PKC primary key (l_log_id)
+  , new_org_name character varying(255) not null
+  , created_at timestamp(6) with time zone default now()
+  , updated_at timestamp(6) with time zone default now()
+  , constraint l_org_log_PKC primary key (log_id)
 ) ;
 
 create unique index l_org_log_pki
-  on l_org_log(l_log_id);
+  on l_org_log(log_id);
 
 -- 生産者
 --* RestoreFromTempTable
@@ -42,8 +42,8 @@ create table m_producer (
   producer_id bigint not null
   , org_id bigint
   , name character varying(255) not null
-  , created_at timestamp(6) without time zone default now() not null
-  , updated_at timestamp(6) without time zone default now() not null
+  , created_at timestamp(6) without time zone default now()
+  , updated_at timestamp(6) without time zone default now()
   , constraint m_producer_PKC primary key (producer_id)
 ) ;
 
@@ -56,8 +56,8 @@ create table m_product (
   product_id bigint not null
   , name character varying(30) not null
   , price integer
-  , created_at timestamp(6) with time zone default now() not null
-  , updated_at timestamp(6) with time zone default now() not null
+  , created_at timestamp(6) with time zone default now()
+  , updated_at timestamp(6) with time zone default now()
   , constraint m_product_PKC primary key (product_id)
 ) ;
 
@@ -76,19 +76,19 @@ create unique index r_product_producer_ix1
   on r_product_producer(product_id,producer_id);
 
 comment on table m_organization is '組織テーブル';
-comment on column m_organization.updated_at is '更新日時';
-comment on column m_organization.created_at is '登録日時';
-comment on column m_organization.org_name is '組織名';
 comment on column m_organization.org_id is '組織ID';
+comment on column m_organization.org_name is '組織名';
+comment on column m_organization.created_at is '登録日時';
+comment on column m_organization.updated_at is '更新日時';
 
 comment on table l_org_log is '所属組織ログ';
-comment on column l_org_log.updated_at is '更新日時';
-comment on column l_org_log.created_at is '登録日時';
-comment on column l_org_log.new_org_name is '現所属組織名';
-comment on column l_org_log.new_org_id is '現所属組織ID';
-comment on column l_org_log.old_org_name is '旧所属組織名';
+comment on column l_org_log.log_id is 'ログID';
 comment on column l_org_log.old_org_id is '旧所属組織ID';
-comment on column l_org_log.l_log_id is 'ログID';
+comment on column l_org_log.old_org_name is '旧所属組織名';
+comment on column l_org_log.new_org_id is '現所属組織ID';
+comment on column l_org_log.new_org_name is '現所属組織名';
+comment on column l_org_log.created_at is '登録日時';
+comment on column l_org_log.updated_at is '更新日時';
 
 comment on table m_producer is '生産者';
 comment on column m_producer.producer_id is 'ID';
